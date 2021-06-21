@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  font-weight: 800 !important;
+  filter: drop-shadow(0px 0px 1px blue);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+#heading {
+}
