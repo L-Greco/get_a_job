@@ -16,6 +16,11 @@ class SearchBar extends Component {
           aria-label="Search"
           value={this.state.query}
           onChange={(e) => this.setState({ query: e.target.value })}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === "NumpadEnter") {
+              this.props.queryToState(this.state.query);
+            }
+          }}
         ></input>
         <button
           className="btn btn-outline-info "
