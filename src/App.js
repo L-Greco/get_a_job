@@ -7,6 +7,7 @@ import SearchBar from './components/SearchBar';
 import { Component } from "react"
 import JobList from './components/JobList';
 import CompanyDetail from "./components/CompanyDetail"
+import LikedCompaniesIndicator from './components/LikedCompaniesIndicator';
 class App extends Component {
   state = {
     query: "",
@@ -31,6 +32,7 @@ class App extends Component {
               </Link>
               <Route path="/" exact render={(routerProps) => <SearchBar {...routerProps} queryToState={this.queryToState} />} />
               {/* <SearchBar queryToState={this.queryToState} /> */}
+              <LikedCompaniesIndicator />
             </Col>
           </Row>
           <hr />

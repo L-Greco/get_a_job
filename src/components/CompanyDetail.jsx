@@ -14,7 +14,7 @@ class CompanyDetail extends Component {
       : this.setState({ isLoading: true });
   };
 
-  componentDidMount = async () => {
+  fetchData = async () => {
     try {
       this.toggleLoader();
       let res = await fetch(
@@ -36,13 +36,23 @@ class CompanyDetail extends Component {
     }
   };
 
+  componentDidMount = async () => {
+    this.fetchData();
+  };
+
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.match.params.company !== this.props.match.params.company) {
+      this.fetchData();
+    }
+  };
+
   render() {
     return (
       <Row>
         {this.state.isLoading && (
           <Spinner className="mx-auto" animation="border" variant="info" />
         )}
-        <Col sm={4}>
+        <Col xs={4}>
           {this.state.jobs.length > 0 && !this.state.isLoading ? (
             this.state.jobs.map((job) => (
               <Card key={job.id}>
@@ -73,7 +83,7 @@ class CompanyDetail extends Component {
             <h2> </h2>
           )}
         </Col>
-        <Col sm={8}>
+        <Col xs={8}>
           <JobDetail job={this.state.selectedJob} />
         </Col>
       </Row>

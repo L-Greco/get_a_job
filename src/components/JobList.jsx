@@ -3,13 +3,16 @@ import { Col, Row, Spinner, Card, Button } from "react-bootstrap";
 import JobDetail from "./JobDetail";
 import { AiFillHeart } from "react-icons/ai";
 import { connect } from "react-redux";
-import { likeCompany } from "../actions";
+import { likeCompany, unlikeCompany } from "../actions";
 
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
   LikeCompany: (company) => {
     dispatch(likeCompany(company));
+  },
+  UnlikeCompany: (company) => {
+    dispatch(unlikeCompany(company));
   },
 });
 
@@ -18,6 +21,7 @@ class JobList extends Component {
     isLoading: false,
     jobs: [],
     selectedJob: "",
+    jobTitle: "",
   };
 
   toggleLoader = () => {
@@ -82,24 +86,56 @@ class JobList extends Component {
               this.state.jobs.map((job) => (
                 <Card key={job.id}>
                   <Card.Body>
-                    <Card.Title>{job.title}</Card.Title>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Card.Title>{job.title}</Card.Title>
+                      <a href="#jobDetailPage">
+                        <p
+                          onClick={() =>
+                            this.setState({
+                              selectedJob: job.description,
+                              jobTitle: job.title,
+                            })
+                          }
+                          className="mr-1 functionalP"
+                        >
+                          Details
+                        </p>
+                      </a>
+                    </div>
                     <Card.Text>
                       <strong>Job Type : </strong>
                       {job.job_type}
                     </Card.Text>
                     <div
-                      className="d-flex "
                       style={{
-                        alignItems: "center",
-                        justifyContent: "space-around",
+                        display: "flex ",
+                        justifyContent: "space-between",
+                        flexDirection: "row",
                       }}
                     >
-                      <strong>Company: </strong>
-                      <em>{job.company_name} </em>
+                      <strong>Company :</strong>
+                      <p
+                        className="functionalP"
+                        onClick={() =>
+                          this.props.history.push(
+                            `/Company/${job.company_name}`
+                          )
+                        }
+                      >
+                        {job.company_name}
+                      </p>
 
                       <Button
                         onClick={() => {
-                          this.props.LikeCompany(job.company_name);
+                          this.props.companies.includes(job.company_name)
+                            ? this.props.UnlikeCompany(job.company_name)
+                            : this.props.LikeCompany(job.company_name);
                         }}
                         style={{ float: "right" }}
                         variant="danger"
@@ -113,27 +149,7 @@ class JobList extends Component {
                         display: "flex",
                         justifyContent: "space-between",
                       }}
-                    >
-                      <Button
-                        onClick={() =>
-                          this.setState({ selectedJob: job.description })
-                        }
-                        variant="info"
-                        className="mr-1"
-                      >
-                        Details
-                      </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() =>
-                          this.props.history.push(
-                            `/Company/${job.company_name}`
-                          )
-                        }
-                      >
-                        Company
-                      </Button>
-                    </div>
+                    ></div>
                   </Card.Body>
                 </Card>
               ))
@@ -142,7 +158,10 @@ class JobList extends Component {
             )}
           </Col>
           <Col sm={8}>
-            <JobDetail job={this.state.selectedJob} />
+            <JobDetail
+              job={this.state.selectedJob}
+              title={this.state.jobTitle}
+            />
           </Col>
         </Row>
       </>

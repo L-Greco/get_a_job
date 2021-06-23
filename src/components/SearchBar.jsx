@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Col, Row } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
 class SearchBar extends Component {
