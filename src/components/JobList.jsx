@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { Col, Row, Spinner, Card, Button } from "react-bootstrap";
 import JobDetail from "./JobDetail";
+import { AiFillHeart } from "react-icons/ai";
+
 class JobList extends Component {
   state = {
     isLoading: false,
@@ -39,54 +41,95 @@ class JobList extends Component {
 
   render() {
     return (
-      <Row>
+      <>
         {this.state.isLoading && (
-          <Spinner className="mx-auto" animation="border" variant="info" />
+          <div style={{ display: "flex" }}>
+            <div className="mx-auto">
+              <Spinner
+                animation="grow"
+                style={{ marginRight: "10px" }}
+                variant="info"
+              />
+              <Spinner
+                animation="grow"
+                style={{ marginRight: "10px" }}
+                variant="info"
+              />
+              <Spinner animation="grow" variant="info" />
+            </div>
+          </div>
         )}
-        <Col sm={4}>
-          {this.state.jobs.length > 0 && !this.state.isLoading ? (
-            this.state.jobs.map((job) => (
-              <Card key={job.id}>
-                <Card.Body>
-                  <Card.Title>{job.title}</Card.Title>
-                  <Card.Text>
-                    <strong>Job Type : </strong>
-                    {job.job_type}
-                  </Card.Text>
-                  <Card.Text>
-                    <strong>Company: </strong>
-                    {job.company_name}
-                  </Card.Text>
-                  <div style={{ display: "flex" }}>
-                    <Button
-                      onClick={() =>
-                        this.setState({ selectedJob: job.description })
-                      }
-                      variant="primary"
-                      className="mr-1"
-                    >
-                      Details
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={() =>
-                        this.props.history.push(`/Company/${job.company_name}`)
-                      }
-                    >
-                      Company
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            ))
-          ) : (
-            <h2> </h2>
+
+        <Row>
+          {this.state.jobs.length > 0 && !this.state.isLoading && (
+            <p style={{ color: "#b9b9b9" }}>
+              Results : {this.state.jobs.length}
+            </p>
           )}
-        </Col>
-        <Col sm={8}>
-          <JobDetail job={this.state.selectedJob} />
-        </Col>
-      </Row>
+
+          <Col sm={4}>
+            {this.state.jobs.length > 0 && !this.state.isLoading ? (
+              this.state.jobs.map((job) => (
+                <Card key={job.id} style={{ width: "270px" }}>
+                  <Card.Body>
+                    <Card.Title>{job.title}</Card.Title>
+                    <Card.Text>
+                      <strong>Job Type : </strong>
+                      {job.job_type}
+                    </Card.Text>
+                    <div
+                      className="d-flex "
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <strong>Company: </strong>
+                      <em>{job.company_name} </em>
+
+                      <Button style={{ float: "right" }} variant="danger">
+                        <AiFillHeart style={{ fontSize: "1rem" }} />
+                      </Button>
+                    </div>
+                    <div
+                      className="mt-1"
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Button
+                        onClick={() =>
+                          this.setState({ selectedJob: job.description })
+                        }
+                        variant="info"
+                        className="mr-1"
+                      >
+                        Details
+                      </Button>
+                      <Button
+                        variant="primary"
+                        onClick={() =>
+                          this.props.history.push(
+                            `/Company/${job.company_name}`
+                          )
+                        }
+                      >
+                        Company
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              ))
+            ) : (
+              <h2> </h2>
+            )}
+          </Col>
+          <Col sm={8}>
+            <JobDetail job={this.state.selectedJob} />
+          </Col>
+        </Row>
+      </>
     );
   }
 }

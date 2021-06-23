@@ -1,9 +1,5 @@
-import { Component } from "react";
-
-class JobDetail extends Component {
-  render() {
-    return <td dangerouslySetInnerHTML={{ __html: this.props.job }} />;
-  }
-}
+const JobDetail = ({ job }) => {
+  return <td dangerouslySetInnerHTML={{ __html: job }} />;
+};
 
 export default JobDetail;
