@@ -110,7 +110,9 @@ class JobList extends Component {
                     </div>
                     <Card.Text>
                       <strong>Job Type : </strong>
-                      {job.job_type}
+                      {job.job_type.indexOf("_") !== -1
+                        ? job.job_type.replace("_", " ")
+                        : job.job_type}
                     </Card.Text>
                     <div
                       style={{
