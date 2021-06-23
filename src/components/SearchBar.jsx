@@ -22,7 +22,7 @@ class SearchBar extends Component {
             }
           }}
         ></input>
-        <button
+        {/* <button
           className="btn btn-outline-info "
           onClick={() => {
             this.props.history.push(`/`);
@@ -30,7 +30,7 @@ class SearchBar extends Component {
           }}
         >
           Go!
-        </button>
+        </button> */}
       </div>
     );
   }

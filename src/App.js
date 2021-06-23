@@ -29,7 +29,8 @@ class App extends Component {
                   onClick={() => this.setState({ query: this.state.query + " " })}
                 >Get a Job</h1>
               </Link>
-              <SearchBar queryToState={this.queryToState} />
+              <Route path="/" exact render={(routerProps) => <SearchBar {...routerProps} queryToState={this.queryToState} />} />
+              {/* <SearchBar queryToState={this.queryToState} /> */}
             </Col>
           </Row>
           <hr />

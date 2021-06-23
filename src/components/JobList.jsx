@@ -2,6 +2,16 @@ import { Component } from "react";
 import { Col, Row, Spinner, Card, Button } from "react-bootstrap";
 import JobDetail from "./JobDetail";
 import { AiFillHeart } from "react-icons/ai";
+import { connect } from "react-redux";
+import { likeCompany } from "../actions";
+
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch) => ({
+  LikeCompany: (company) => {
+    dispatch(likeCompany(company));
+  },
+});
 
 class JobList extends Component {
   state = {
@@ -70,7 +80,7 @@ class JobList extends Component {
           <Col sm={4}>
             {this.state.jobs.length > 0 && !this.state.isLoading ? (
               this.state.jobs.map((job) => (
-                <Card key={job.id} style={{ width: "270px" }}>
+                <Card key={job.id}>
                   <Card.Body>
                     <Card.Title>{job.title}</Card.Title>
                     <Card.Text>
@@ -87,7 +97,13 @@ class JobList extends Component {
                       <strong>Company: </strong>
                       <em>{job.company_name} </em>
 
-                      <Button style={{ float: "right" }} variant="danger">
+                      <Button
+                        onClick={() => {
+                          this.props.LikeCompany(job.company_name);
+                        }}
+                        style={{ float: "right" }}
+                        variant="danger"
+                      >
                         <AiFillHeart style={{ fontSize: "1rem" }} />
                       </Button>
                     </div>
@@ -134,4 +150,4 @@ class JobList extends Component {
   }
 }
 
-export default JobList;
+export default connect(mapStateToProps, mapDispatchToProps)(JobList);
