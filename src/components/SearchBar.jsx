@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
 class SearchBar extends Component {
   state = {
@@ -18,7 +19,10 @@ class SearchBar extends Component {
         ></input>
         <button
           className="btn btn-outline-info "
-          onClick={() => this.props.queryToState(this.state.query)}
+          onClick={() => {
+            this.props.history.push(`/`);
+            this.props.queryToState(this.state.query);
+          }}
         >
           Go!
         </button>
@@ -27,4 +31,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

@@ -14,18 +14,17 @@ class CompanyDetail extends Component {
       : this.setState({ isLoading: true });
   };
 
-  componentDidMount = async (prevProps) => {
+  componentDidMount = async () => {
     try {
       this.toggleLoader();
       let res = await fetch(
-        "https://remotive.io/api/remote-jobs?search=company_name=" +
+        "https://remotive.io/api/remote-jobs?company_name=" +
           this.props.match.params.company
       );
       if (res.ok) {
         let data = await res.json();
         this.toggleLoader();
         this.setState({ jobs: data.jobs });
-        console.log(this.state.jobs);
       } else {
         this.toggleLoader();
         alert("response status is : " + res.status);
@@ -50,7 +49,12 @@ class CompanyDetail extends Component {
                 <Card.Body>
                   <Card.Title>{job.title}</Card.Title>
                   <Card.Text>
-                    <strong>{job.job_type}</strong>
+                    <strong>Job Type : </strong>
+                    {job.job_type}
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>Company: </strong>
+                    {job.company_name}
                   </Card.Text>
                   <div style={{ display: "flex" }}>
                     <Button
@@ -60,14 +64,6 @@ class CompanyDetail extends Component {
                       variant="primary"
                     >
                       Details
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={() =>
-                        this.props.history.push(`/Company/:${job.company_name}`)
-                      }
-                    >
-                      Company
                     </Button>
                   </div>
                 </Card.Body>

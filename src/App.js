@@ -25,14 +25,16 @@ class App extends Component {
           <Row>
             <Col id="heading" sm={12} className="text-center mt-5">
               <Link to="/">
-                <h1>Get a Job</h1>
+                <h1
+                  onClick={() => this.setState({ query: this.state.query + " " })}
+                >Get a Job</h1>
               </Link>
               <SearchBar queryToState={this.queryToState} />
             </Col>
           </Row>
           <hr />
           <Route path="/" exact render={(routerProps) => <JobList {...routerProps} query={this.state.query} />} />
-          <Route path="/Company" exact render={(routerProps) => <CompanyDetail {...routerProps} company={this.state.company} />} />
+          <Route path="/Company/:company" exact render={(routerProps) => <CompanyDetail {...routerProps} />} />
         </Container>
       </Router>
     );

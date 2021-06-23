@@ -25,7 +25,6 @@ class JobList extends Component {
           let data = await res.json();
           this.toggleLoader();
           this.setState({ jobs: data.jobs });
-          console.log(this.state.jobs);
         } else {
           this.toggleLoader();
           alert("response status is : " + res.status);
@@ -51,7 +50,12 @@ class JobList extends Component {
                 <Card.Body>
                   <Card.Title>{job.title}</Card.Title>
                   <Card.Text>
-                    <strong>{job.job_type}</strong>
+                    <strong>Job Type : </strong>
+                    {job.job_type}
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>Company: </strong>
+                    {job.company_name}
                   </Card.Text>
                   <div style={{ display: "flex" }}>
                     <Button
@@ -59,13 +63,14 @@ class JobList extends Component {
                         this.setState({ selectedJob: job.description })
                       }
                       variant="primary"
+                      className="mr-1"
                     >
                       Details
                     </Button>
                     <Button
                       variant="primary"
                       onClick={() =>
-                        this.props.history.push(`/Company/:${job.company_name}`)
+                        this.props.history.push(`/Company/${job.company_name}`)
                       }
                     >
                       Company
