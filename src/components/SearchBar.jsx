@@ -11,7 +11,8 @@ class SearchBar extends Component {
         <input
           className="form-control mt-3 "
           type="search"
-          placeholder="Search"
+          style={{ fontFamily: '"Indie Flower" !important;' }}
+          placeholder="Search for the job you're looking for..."
           aria-label="Search"
           value={this.state.query}
           onChange={(e) => this.setState({ query: e.target.value })}
@@ -21,15 +22,15 @@ class SearchBar extends Component {
             }
           }}
         ></input>
-        {/* <button
-          className="btn btn-outline-info "
+        <button
+          className="btn btn-outline-info px-4"
           onClick={() => {
             this.props.history.push(`/`);
             this.props.queryToState(this.state.query);
           }}
         >
           Go!
-        </button> */}
+        </button>
       </div>
     );
   }

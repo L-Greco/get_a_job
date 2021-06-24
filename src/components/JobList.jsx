@@ -30,6 +30,13 @@ class JobList extends Component {
       : this.setState({ isLoading: true });
   };
 
+  heartChecker = (selectedCompanies, currentCompany) => {
+    let filteredArray = selectedCompanies.filter(
+      (company) => company === currentCompany
+    );
+    return filteredArray.length > 0 ? "selectedHeart " : "unselectedHeart";
+  };
+
   componentDidUpdate = async (prevProps) => {
     if (prevProps.query !== this.props.query) {
       try {
@@ -119,6 +126,7 @@ class JobList extends Component {
                         display: "flex ",
                         justifyContent: "space-between",
                         flexDirection: "row",
+                        alignItems: "flex-start",
                       }}
                     >
                       <strong>Company :</strong>
@@ -133,17 +141,25 @@ class JobList extends Component {
                         {job.company_name}
                       </p>
 
-                      <Button
+                      <button
                         onClick={() => {
                           this.props.companies.includes(job.company_name)
                             ? this.props.UnlikeCompany(job.company_name)
                             : this.props.LikeCompany(job.company_name);
                         }}
-                        style={{ float: "right" }}
-                        variant="danger"
+                        style={{
+                          float: "right",
+                          border: "none",
+                          backgroundColor: "white",
+                        }}
                       >
-                        <AiFillHeart style={{ fontSize: "1rem" }} />
-                      </Button>
+                        <AiFillHeart
+                          className={this.heartChecker(
+                            this.props.companies,
+                            job.company_name
+                          )}
+                        />
+                      </button>
                     </div>
                     <div
                       className="mt-1"
