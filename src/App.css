@@ -50,15 +50,32 @@ a {
   text-decoration: none !important;
 }
 
+.flexC {
+  display: flex;
+  flex-direction: column;
+}
+
 #heading {
+}
+.removeComps {
+  color: rgb(97, 96, 99);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s linear;
+  font-family: "Courier New", Courier, monospace;
+}
+.removeComps:hover {
+  transform: rotate(15deg);
+  /* transform: scale(1.2); */
 }
 
 .functionalP {
-  font-weight: 700;
+  font-weight: 900;
   color: rgb(13, 110, 253);
   font-style: italic;
   cursor: pointer;
   transition: 0.2s linear;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .functionalP:hover {
@@ -67,7 +84,7 @@ a {
 
 .unselectedHeart {
   color: grey;
-  font-size: 1rem;
+  font-size: 1.5rem;
   transition: 0.2s linear;
 }
 .unselectedHeart:hover {
@@ -76,7 +93,7 @@ a {
 }
 .selectedHeart {
   color: rgb(220, 53, 69);
-  font-size: 1rem;
+  font-size: 1.5rem;
   transition: 0.2s linear;
 }
 .selectedHeart:hover {

@@ -1,32 +1,28 @@
-import { initialState } from "../store";
+// USED THIS REDUCER BEFORE
+// NOW I COMBINE TWO DIFFERENT REDUCERS TO ONE 
 
-const mainReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "LIKE_COMPANY":
-            // let newCompanies = [...state.companies, action.payload]
-            // let doubleChecker = newCompanies.filter(company => company === action.payload)
+// import { initialState } from "../store";
 
-            // if (doubleChecker.length > 1) {
-            //     alert("You must really love this company cause you have already liked it!!!")
+// const mainReducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         case "LIKE_COMPANY":
 
-            // }
-            // else {
-            return {
-                ...state,
-                companies: [...state.companies, action.payload]
-            }
-        // }
+//             return {
+//                 ...state,
+//                 companies: [...state.companies, action.payload]
+//             }
 
-        case "UNLIKE_COMPANY":
 
-            let updatedCompanies = state.companies.filter(company => company !== action.payload)
-            return {
-                ...state,
-                companies: updatedCompanies
-            }
-        default:
-            return state
-    }
-}
+//         case "UNLIKE_COMPANY":
 
-export default mainReducer
+//             let updatedCompanies = state.companies.filter(company => company !== action.payload)
+//             return {
+//                 ...state,
+//                 companies: updatedCompanies
+//             }
+//         default:
+//             return state
+//     }
+// }
+
+// export default mainReducer

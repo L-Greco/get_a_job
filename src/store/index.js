@@ -1,12 +1,24 @@
-import { createStore } from "redux"
-import mainReducer from "../reducers"
+import { createStore, combineReducers, applyMiddleware, compose } from "redux"
+import dataReducer from "../reducers/data.js"
+import likeReducer from "../reducers/like.js"
 
 
 export const initialState = {
-    companies: []
+    like: {
+        companies: []
+    },
+    data: {
+        jobs: []
+    }
+
 }
 
+const combinedReducer = combineReducers({
+    like: likeReducer,
+    data: dataReducer
+})
+
 const configureStore = () =>
-    createStore(mainReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+    createStore(combinedReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 export default configureStore

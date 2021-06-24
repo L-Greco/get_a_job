@@ -3,7 +3,7 @@ import { Component } from "react";
 import LikedCompanies from "./LikedCompanies";
 
 const mapStateToProps = (state) => ({
-  likedCompanies: state.companies.length,
+  likedCompanies: state.like.companies.length,
 });
 
 class likedCompaniesIndicator extends Component {

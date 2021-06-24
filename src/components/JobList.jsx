@@ -83,7 +83,7 @@ class JobList extends Component {
 
         <Row>
           {this.state.jobs.length > 0 && !this.state.isLoading && (
-            <p style={{ color: "#b9b9b9" }}>
+            <p style={{ color: "#b9b9b9", fontStyle: "italic" }}>
               Results : {this.state.jobs.length}
             </p>
           )}
@@ -143,7 +143,7 @@ class JobList extends Component {
 
                       <button
                         onClick={() => {
-                          this.props.companies.includes(job.company_name)
+                          this.props.like.companies.includes(job.company_name)
                             ? this.props.UnlikeCompany(job.company_name)
                             : this.props.LikeCompany(job.company_name);
                         }}
@@ -155,7 +155,7 @@ class JobList extends Component {
                       >
                         <AiFillHeart
                           className={this.heartChecker(
-                            this.props.companies,
+                            this.props.like.companies,
                             job.company_name
                           )}
                         />
