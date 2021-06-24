@@ -1,14 +1,17 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux"
+import thunk from "redux-thunk"
 import dataReducer from "../reducers/data.js"
 import likeReducer from "../reducers/like.js"
 
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export const initialState = {
     like: {
         companies: []
     },
     data: {
-        jobs: []
+        jobs: [],
+        query: ""
     }
 
 }
@@ -19,6 +22,6 @@ const combinedReducer = combineReducers({
 })
 
 const configureStore = () =>
-    createStore(combinedReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+    createStore(combinedReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
 
 export default configureStore

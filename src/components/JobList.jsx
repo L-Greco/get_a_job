@@ -1,9 +1,11 @@
 import { Component } from "react";
-import { Col, Row, Spinner, Card, Button } from "react-bootstrap";
+import { Col, Row, Spinner, Card } from "react-bootstrap";
 import JobDetail from "./JobDetail";
 import { AiFillHeart } from "react-icons/ai";
 import { connect } from "react-redux";
-import { likeCompany, unlikeCompany } from "../actions";
+import { likeCompany, unlikeCompany, fetchJobsAction } from "../actions";
+
+const endpoint = "https://remotive.io/api/remote-jobs?search=";
 
 const mapStateToProps = (state) => state;
 
@@ -13,6 +15,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   UnlikeCompany: (company) => {
     dispatch(unlikeCompany(company));
+  },
+  fetchingJobs: (endpoint, query) => {
+    dispatch(fetchJobsAction(endpoint + query));
   },
 });
 

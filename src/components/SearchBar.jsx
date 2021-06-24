@@ -1,5 +1,17 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { typeQuery, fetchJobsAction } from "../actions";
+
+const mapStateToProps = (state) => ({
+  query: state.data.query,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  typingQuery: (query) => {
+    dispatch(typeQuery(query));
+  },
+});
 
 class SearchBar extends Component {
   state = {
@@ -18,15 +30,18 @@ class SearchBar extends Component {
           onChange={(e) => this.setState({ query: e.target.value })}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === "NumpadEnter") {
-              this.props.queryToState(this.state.query);
+              console.log(this.props.history);
+              // this.props.history.push(`/`);
+              this.props.typingQuery(this.state.query);
             }
           }}
         ></input>
         <button
           className="btn btn-outline-info px-4"
           onClick={() => {
-            this.props.history.push(`/`);
-            this.props.queryToState(this.state.query);
+            console.log(this.props.history);
+            // this.props.history.push(`/`);
+            this.props.typingQuery(this.state.query);
           }}
         >
           Go!
@@ -36,4 +51,7 @@ class SearchBar extends Component {
   }
 }
 
-export default withRouter(SearchBar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(SearchBar));
