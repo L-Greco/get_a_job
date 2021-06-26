@@ -11,7 +11,10 @@ export const initialState = {
     },
     data: {
         jobs: [],
-        query: ""
+        query: "",
+        isLoading: false,
+        error: ""
+
     }
 
 }
@@ -21,7 +24,7 @@ const combinedReducer = combineReducers({
     data: dataReducer
 })
 
-const configureStore = () =>
-    createStore(combinedReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
+const configureStore = () => createStore(combinedReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
+
 
 export default configureStore

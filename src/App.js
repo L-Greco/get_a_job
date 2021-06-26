@@ -14,10 +14,10 @@ class App extends Component {
     company: ""
   }
 
-  queryToState = (query) => {
-    let modifiedQuery = query.replace(" ", "%20")
-    this.setState({ query: modifiedQuery })
-  }
+  // queryToState = (query) => {
+  //   let modifiedQuery = query.replace(" ", "%20")
+  //   this.setState({ query: modifiedQuery })
+  // }
 
   render() {
     return (
@@ -26,16 +26,14 @@ class App extends Component {
           <Row>
             <Col id="heading" sm={12} className="text-center mt-5">
               <Link to="/">
-                <h1
-                  onClick={() => this.setState({ query: this.state.query + " " })}
-                >Get a Job</h1>
+                <h1>Get a Job</h1>
               </Link>
               <SearchBar />
               <LikedCompaniesIndicator />
             </Col>
           </Row>
           <hr />
-          <Route path="/" exact render={(routerProps) => <JobList {...routerProps} query={this.state.query} />} />
+          <Route path="/" exact component={JobList} />
           <Route path="/Company/:company" exact render={(routerProps) => <CompanyDetail {...routerProps} />} />
         </Container>
       </Router>

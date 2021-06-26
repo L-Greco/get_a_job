@@ -12,20 +12,20 @@ export const typeQuery = (query) => ({
     payload: query
 })
 
-export const fetchJobsAction = () => {
+export const fetchJobsAction = (url) => {
     return async (dispatch, getState) => {
         try {
             dispatch({
                 type: 'SET_LOADING',
                 payload: true,
             })
-            let resp = await fetch('https://remotive.io/api/remote-jobs?search=')
+            let resp = await fetch(url)
             console.log(getState())
             if (resp.ok) {
-                let books = await resp.json()
+                let jobs = await resp.json()
                 dispatch({
-                    type: 'GET_BOOKS',
-                    payload: books,
+                    type: 'GET_JOBS',
+                    payload: jobs.jobs,
                 })
                 dispatch({
                     type: 'SET_LOADING',

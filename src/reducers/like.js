@@ -1,6 +1,6 @@
 import { initialState } from "../store";
 
-const likeReducer = (state = initialState.like, action) => {
+const likeReducer = (state = initialState.like, action) => { //{ type: "LIKE_COMPANY", payload: company }
     switch (action.type) {
         case "LIKE_COMPANY":
 

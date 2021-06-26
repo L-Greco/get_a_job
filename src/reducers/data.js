@@ -22,7 +22,7 @@ const dataReducer = (state = initialState.data, action) => {
         case 'SET_LOADING':
             return {
                 ...state,
-                loading: action.payload,
+                isLoading: action.payload,
             }
 
         default:
