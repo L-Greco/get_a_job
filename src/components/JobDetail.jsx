@@ -10,7 +10,11 @@ const JobDetail = ({ job, title }) => {
       // }}
     >
       <h2>{title} </h2>
-      <td dangerouslySetInnerHTML={{ __html: job }} />
+      {job.toLowerCase().includes("<script>") ? (
+        alert("DANGER , SCRIPT INSIDE THE HTML!!")
+      ) : (
+        <td dangerouslySetInnerHTML={{ __html: job }} />
+      )}
     </main>
   );
 };
