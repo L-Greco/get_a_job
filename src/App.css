@@ -100,3 +100,15 @@ a {
   transform: scale(1.5);
   color: grey;
 }
+
+.addedComps {
+  color: rgb(13, 202, 240);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  /* border-bottom: 1px solid rgb(43, 44, 44); */
+  transition: 0.2s linear;
+}
+.addedComps:hover {
+  transform: rotate(5deg);
+}

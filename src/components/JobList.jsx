@@ -27,13 +27,6 @@ class JobList extends Component {
     jobTitle: "",
   };
 
-  // loader now comes from the global (redux) state
-  // toggleLoader = () => {
-  //   this.state.isLoading
-  //     ? this.setState({ isLoading: false })
-  //     : this.setState({ isLoading: true });
-  // };
-  // fuction for different css on selected companies (changes the appearance of the hear )
   heartChecker = (selectedCompanies, currentCompany) => {
     let filteredArray = selectedCompanies.filter(
       (company) => company === currentCompany
@@ -41,32 +34,6 @@ class JobList extends Component {
     return filteredArray.length > 0 ? "selectedHeart " : "unselectedHeart";
   };
 
-  // componentDidMount = async () => {
-  //   this.props.
-  //   this.props.fetchingJobs(endpoint+)
-  // };
-  // componentDidUpdate = async (prevProps) => {
-  //   if (prevProps.query !== this.props.query) {
-  //     try {
-  //       this.toggleLoader();
-  //       let res = await fetch(
-  //         "https://remotive.io/api/remote-jobs?search=" + this.props.query
-  //       );
-  //       if (res.ok) {
-  //         let data = await res.json();
-  //         this.toggleLoader();
-  //         this.setState({ jobs: data.jobs });
-  //       } else {
-  //         this.toggleLoader();
-  //         alert("response status is : " + res.status);
-  //       }
-  //     } catch (error) {
-  //       this.toggleLoader();
-  //       console.log(error);
-  //       alert(error.message);
-  //     }
-  //   }
-  // };
   componentDidUpdate = (prevProps) => {
     if (
       prevProps.data.query !== this.props.data.query ||
@@ -117,6 +84,7 @@ class JobList extends Component {
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
+                        flexWrap: "wrap",
                       }}
                     >
                       <Card.Title>{job.title}</Card.Title>
@@ -146,6 +114,7 @@ class JobList extends Component {
                         justifyContent: "space-between",
                         flexDirection: "row",
                         alignItems: "flex-start",
+                        flexWrap: "wrap",
                       }}
                     >
                       <strong>Company :</strong>

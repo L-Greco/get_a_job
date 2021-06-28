@@ -1,8 +1,14 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-const mapStateToProps = (state) => state;
+import { unlikeCompany } from "../actions";
 
-const LikedCompanies = ({ like, history }) => {
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => ({
+  UnlikeCompany: (company) => {
+    dispatch(unlikeCompany(company));
+  },
+});
+const LikedCompanies = ({ like, history, UnlikeCompany }) => {
   return (
     <div
       style={{
@@ -16,21 +22,21 @@ const LikedCompanies = ({ like, history }) => {
       {like.companies.map((company, index) => (
         <div className="flexC my-0">
           <p
-            style={{
-              color: "rgb(13,202,240)",
-              fontWeight: "700",
-              fontSize: "1rem",
-              cursor: "pointer",
-            }}
+            className="addedComps"
             onClick={() => history.push(`/Company/${company}`)}
           >
             <em>{company}</em>
           </p>
-          <p className="removeComps">Remove</p>
+          <p className="removeComps" onClick={() => UnlikeCompany(company)}>
+            Remove
+          </p>
         </div>
       ))}
     </div>
   );
 };
 
-export default connect(mapStateToProps)(withRouter(LikedCompanies));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(LikedCompanies));
