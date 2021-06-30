@@ -6,6 +6,7 @@ class CompanyDetail extends Component {
     isLoading: false,
     jobs: [],
     selectedJob: "",
+    jobTitle: "",
   };
 
   toggleLoader = () => {
@@ -48,45 +49,70 @@ class CompanyDetail extends Component {
 
   render() {
     return (
-      <Row>
+      <>
         {this.state.isLoading && (
-          <Spinner className="mx-auto" animation="border" variant="info" />
+          <div style={{ display: "flex" }}>
+            <div className="mx-auto">
+              <Spinner
+                animation="grow"
+                style={{ marginRight: "10px" }}
+                variant="info"
+              />
+              <Spinner
+                animation="grow"
+                style={{ marginRight: "10px" }}
+                variant="info"
+              />
+              <Spinner animation="grow" variant="info" />
+            </div>
+          </div>
         )}
-        <Col xs={4}>
-          {this.state.jobs.length > 0 && !this.state.isLoading ? (
-            this.state.jobs.map((job) => (
-              <Card key={job.id}>
-                <Card.Body>
-                  <Card.Title>{job.title}</Card.Title>
-                  <Card.Text>
-                    <strong>Job Type : </strong>
-                    {job.job_type}
-                  </Card.Text>
-                  <Card.Text>
-                    <strong>Company: </strong>
-                    {job.company_name}
-                  </Card.Text>
-                  <div style={{ display: "flex" }}>
-                    <Button
-                      onClick={() =>
-                        this.setState({ selectedJob: job.description })
-                      }
-                      variant="primary"
-                    >
-                      Details
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            ))
-          ) : (
-            <h2> </h2>
-          )}
-        </Col>
-        <Col xs={8}>
-          <JobDetail job={this.state.selectedJob} />
-        </Col>
-      </Row>
+
+        <Row>
+          <Col xs={4}>
+            {this.state.jobs.length > 0 && !this.state.isLoading ? (
+              this.state.jobs.map((job) => (
+                <Card key={job.id}>
+                  <Card.Body>
+                    <Card.Title>{job.title}</Card.Title>
+                    <Card.Text>
+                      <strong>Job Type : </strong>
+                      {job.job_type}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Company: </strong>
+                      {job.company_name}
+                    </Card.Text>
+                    <div style={{ display: "flex" }}>
+                      <Button
+                        onClick={() =>
+                          this.setState({
+                            selectedJob: job.description,
+                            jobTitle: job.title,
+                          })
+                        }
+                        variant="primary"
+                      >
+                        Details
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              ))
+            ) : (
+              <h2> </h2>
+            )}
+          </Col>
+          <Col xs={8}>
+            {!this.state.isLoading && (
+              <JobDetail
+                job={this.state.selectedJob}
+                title={this.state.jobTitle}
+              />
+            )}
+          </Col>
+        </Row>
+      </>
     );
   }
 }
